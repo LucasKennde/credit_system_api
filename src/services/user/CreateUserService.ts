@@ -24,6 +24,11 @@ export class CreateUserService {
         password: hashedPassword,
         cpf,
       },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+      },
     });
     return user;
   }

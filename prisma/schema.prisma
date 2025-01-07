@@ -20,13 +20,42 @@ model User {
   cpf          String
   email        String        @unique
   wallet       Float?        @default(0.0)
+  address      Address[]
   transactions Transaction[]
+  indications  Indication[]
 
-  created_at DateTime?    @default(now())
-  updated_at DateTime?    @updatedAt
-  indication Indication[]
+  created_at DateTime? @default(now())
+  updated_at DateTime? @updatedAt
+  Order      Order[]
 
   @@map("users")
+}
+
+model Address {
+  id           String  @id @default(uuid())
+  postal_code  String
+  address      String
+  neighborhood String
+  city         String
+  state        String
+  complement   String?
+
+  user_id String
+  user    User   @relation(fields: [user_id], references: [id])
+
+  @@map("addresses")
+}
+
+model Product {
+  id          String    @id @default(uuid())
+  name        String
+  price       Float
+  description String
+  image       String
+  created_at  DateTime? @default(now())
+  updated_at  DateTime? @default(now())
+
+  @@map("products")
 }
 
 model Indication {
@@ -50,4 +79,14 @@ model Transaction {
   user      User      @relation(fields: [user_id], references: [id])
 
   @@map("transitions")
+}
+
+model Order {
+  id        String    @id @default(uuid())
+  user_id   String
+  total     Float
+  status    String
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @updatedAt
+  user      User      @relation(fields: [user_id], references: [id])
 }
