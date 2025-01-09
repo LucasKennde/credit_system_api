@@ -3,7 +3,7 @@ import { DetailUserService } from "../../services/user/DetailUserService";
 
 export class DetailUserController {
   async handle(req: Request, res: Response) {
-    const { id } = req.params;
+    const id = req.query.id as string;
     const detailUserService = new DetailUserService();
 
     const user = await detailUserService.execute({

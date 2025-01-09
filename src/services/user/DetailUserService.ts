@@ -4,7 +4,9 @@ interface IUserRequest {
 }
 export class DetailUserService {
   async execute({ id }: IUserRequest) {
-    const user = await prismaClient.user.findFirst({
+    console.log(id);
+
+    const user = await prismaClient.user.findUnique({
       where: { id: id },
       select: {
         id: true,
@@ -12,6 +14,23 @@ export class DetailUserService {
         email: true,
         wallet: true,
         cpf: true,
+        transactions: {
+          select: {
+            id: true,
+            value: true,
+            type: true,
+          },
+        },
+        indications: {
+          select: {
+            id: true,
+            indicated_email: true,
+            createdAt: true,
+            value: true,
+          },
+        },
+        address: true,
+        Order: true,
       },
     });
     return user;

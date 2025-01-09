@@ -3,7 +3,7 @@ import prismaClient from "../../prisma";
 interface IProductRequest {
   name: string;
   description: string;
-  price: number;
+  price: string;
   image: string;
 }
 export class CreateProductService {
@@ -16,6 +16,7 @@ export class CreateProductService {
     if (productAlreadyExist) {
       throw new Error("Product already exist");
     }
+
     const product = await prismaClient.product.create({
       data: {
         name,
