@@ -15,6 +15,9 @@ export class DetailUserService {
         wallet: true,
         cpf: true,
         transactions: {
+          orderBy: {
+            createdAt: "asc",
+          },
           select: {
             id: true,
             value: true,
@@ -22,6 +25,9 @@ export class DetailUserService {
           },
         },
         indications: {
+          orderBy: {
+            createdAt: "asc",
+          },
           select: {
             id: true,
             indicated_email: true,

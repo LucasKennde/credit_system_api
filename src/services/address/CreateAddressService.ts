@@ -20,8 +20,6 @@ export class CreateAddressService {
     complement,
     user_id,
   }: IAddressRequest) {
-    console.log("PASSOU AQUI");
-
     const address = await prismaClient.address.create({
       data: {
         postal_code,
@@ -32,7 +30,17 @@ export class CreateAddressService {
         complement,
         user_id,
       },
+      select: {
+        id: true,
+        state: true,
+        street: true,
+        number: true,
+        complement: true,
+        user_id: true,
+        postal_code: true,
+        city: true,
+      },
     });
-    return { ok: true };
+    return address;
   }
 }

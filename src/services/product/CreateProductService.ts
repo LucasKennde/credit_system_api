@@ -24,6 +24,13 @@ export class CreateProductService {
         price,
         image,
       },
+      select: {
+        id: true,
+        name: true,
+        description: true,
+        price: true,
+        image: true,
+      },
     });
     return product;
   }

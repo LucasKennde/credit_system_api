@@ -13,6 +13,12 @@ export class CreateOrderService {
         total,
         product_id,
       },
+      select: {
+        id: true,
+        user_id: true,
+        total: true,
+        product_id: true,
+      },
     });
     return order;
   }
